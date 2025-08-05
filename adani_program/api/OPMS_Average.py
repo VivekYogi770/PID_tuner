@@ -10,7 +10,7 @@ import pickle
 def OPMS_Average(tag_list, start, end,time_int):
     PI.PIConfig.DEFAULT_TIMEZONE = 'Asia/Kolkata'
 
-    with PI.PIServer('10.81.54.194') as server:
+    with PI.PIServer('00.00.00.000') as server:
         points = server.search(tag_list, source= 'OPMS_APRL_U2')
 
         df=pd.concat([tag.summaries(start, end,time_int,SummaryType.AVERAGE) for tag in points], axis = 1)    
