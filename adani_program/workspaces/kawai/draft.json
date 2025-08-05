@@ -1,0 +1,230 @@
+{
+    "System": {
+       "BOILER SYSTEM": {
+         "super_heater": {
+           "LHS": {
+             "First_stage": [
+               {
+                 "primary_pid": {
+                   "tags": {
+                      "setpointPrimary"      : "KAWAI_U2_1ST_STG_LHS_MN_P_PID_SP",
+                      "measureValuePrimary"  : "KAWAI_U2_1ST_STG_LHS_MN_P_PID_MEAS",
+                      "outputPrimary"        : "KAWAI_U2_1ST_STG_LHS_MN_P_PID_OP",
+                      "setpointSecondary"    : "KAWAI_U2_1ST_STG_LHS_MN_S_PID_SP",
+                      "measureValueSecondary": "KAWAI_U2_1ST_STG_LHS_MN_S_PID_MEAS",
+                      "controlvalveSecondary": "KAWAI_U2_1ST_STG_LHS_MN_S_PID_OP"
+                  },
+                  "parameters": {
+                     "open_loop": {
+                        "kp": "2.5",
+                        "ki": "3.50",
+                        "kd": "0.30"
+                    },
+                     "closed_loop": {
+                        "kp": "2.5",
+                        "ki": "3.50",
+                        "kd": "0.35"
+                    }
+                  }
+                }
+              }
+            ],
+             "Second_stage": [
+              {
+                 "primary_pid": {
+                   "tags": {
+                      "setpointPrimary"      : "KAWAI_U2_2ND_STG_LHS_MN_P_PID_SP",
+                      "measureValuePrimary"  : "KAWAI_U2_2ND_STG_LHS_MN_P_PID_MEAS",
+                      "outputPrimary"        : "KAWAI_U2_2ND_STG_LHS_MN_P_PID_OP",
+                      "setpointSecondary"    : "KAWAI_U2_2ND_STG_LHS_MN_S_PID_SP",
+                      "measureValueSecondary": "KAWAI_U2_2ND_STG_LHS_MN_S_PID_MEAS",
+                      "controlvalveSecondary": "KAWAI_U2_2ND_STG_LHS_MN_S_PID_OP"
+                  },
+                   "parameters": {
+                     "open_loop": {
+                       "kp": "2.5",
+                       "ki": "3.40",
+                       "kd": "0.40"
+                    },
+                     "closed_loop": {
+                       "kp": "2.0",
+                       "ki": "4.00",
+                       "kd": "3.00"
+                    }
+                  }
+                }
+              }
+            ]
+          },
+
+            "RHS": {
+             "First_stage": [
+               {
+                 "primary_pid": {
+                   "tags": {
+                      "setpointPrimary"      : "KAWAI_U2_1ST_STG_RHS_MN_P_PID_SP",
+                      "measureValuePrimary"  : "KAWAI_U2_1ST_STG_RHS_MN_P_PID_MEAS",
+                      "outputPrimary"        : "KAWAI_U2_1ST_STG_RHS_MN_P_PID_OP",
+                      "setpointSecondary"    : "KAWAI_U2_1ST_STG_RHS_MN_S_PID_SP",
+                      "measureValueSecondary": "KAWAI_U2_1ST_STG_RHS_MN_S_PID_MEAS",
+                      "controlvalveSecondary": "KAWAI_U2_1ST_STG_RHS_MN_S_PID_OP"
+                  },
+                  "parameters": {
+                     "open_loop": {
+                        "kp": "1.66",
+                        "ki": "3.00",
+                        "kd": "0.50"
+                    },
+                     "closed_loop": {
+                        "kp": "5.0",
+                        "ki": "2.80",
+                        "kd": "0.10"
+                    }
+                  }
+                }
+              }
+            ],
+             "Second_stage": [
+              {
+                 "primary_pid": {
+                   "tags": {
+                      "setpointPrimary"      : "KAWAI_U2_2ND_STG_RHS_MN_P_PID_SP",
+                      "measureValuePrimary"  : "KAWAI_U2_2ND_STG_RHS_MN_P_PID_MEAS",
+                      "outputPrimary"        : "KAWAI_U2_2ND_STG_RHS_MN_P_PID_OP",
+                      "setpointSecondary"    : "KAWAI_U2_2ND_STG_RHS_MN_S_PID_SP",
+                      "measureValueSecondary": "KAWAI_U2_2ND_STG_RHS_MN_S_PID_MEAS",
+                      "controlvalveSecondary": "KAWAI_U2_2ND_STG_RHS_MN_S_PID_OP"
+                  },
+                   "parameters": {
+                     "open_loop": {
+                       "kp": "2.0",
+                       "ki": "3.40",
+                       "kd": "1.0"
+                    },
+                     "closed_loop": {
+                       "kp": "2.5",
+                       "ki": "2.40",
+                       "kd": "1.00"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+         },
+
+
+        "re_heater": {
+           "LHS": {
+             "First_stage": [
+               {
+                 "primary_pid": {
+                   "tags": {
+                      "setpointPrimary"      : "KAWAI_U2_EMER_FLW_LHS_MN_P_PID_SP",
+                      "measureValuePrimary"  : "KAWAI_U2_EMER_FLW_LHS_MN_P_PID_MEAS",
+                      "outputPrimary"        : "KAWAI_U2_EMER_FLW_LHS_MN_P_PID_OP",
+                      "setpointSecondary"    : "KAWAI_U2_EMER_FLW_LHS_MN_S_PID_SP",
+                      "measureValueSecondary": "KAWAI_U2_EMER_FLW_LHS_MN_S_PID_MEAS",
+                      "controlvalveSecondary": "KAWAI_U2_EMER_FLW_LHS_MN_S_PID_OP"
+                  },
+                  "parameters": {
+                     "open_loop": {
+                        "kp": "1.66",
+                        "ki": "3.00",
+                        "kd": "1.00"
+                    },
+                     "closed_loop": {
+                        "kp": "5.0",
+                        "ki": "3.00",
+                        "kd": "1.00"
+                    }
+                  }
+                }
+              }
+            ],
+             "Second_stage": [
+              {
+                 "primary_pid": {
+                   "tags": {
+                      "setpointPrimary"      : "KAWAI_U2_MICR_FLW_LHS_MN_P_PID_SP",
+                      "measureValuePrimary"  : "KAWAI_U2_MICR_FLW_LHS_MN_P_PID_MEAS",
+                      "outputPrimary"        : "KAWAI_U2_MICR_FLW_LHS_MN_P_PID_OP",
+                      "setpointSecondary"    : "KAWAI_U2_MICR_FLW_LHS_MN_S_PID_SP",
+                      "measureValueSecondary": "KAWAI_U2_MICR_FLW_LHS_MN_S_PID_MEAS",
+                      "controlvalveSecondary": "KAWAI_U2_MICR_FLW_LHS_MN_S_PID_OP"
+                  },
+                   "parameters": {
+                     "open_loop": {
+                       "kp": "1.66",
+                       "ki": "3.00",
+                       "kd": "1.00"
+                    },
+                     "closed_loop": {
+                       "kp": "5.0",
+                       "ki": "2.00",
+                       "kd": "1.00"
+                    }
+                  }
+                }
+              }
+            ]
+          },
+
+            "RHS": {
+             "First_stage": [
+               {
+                 "primary_pid": {
+                   "tags": {
+                      "setpointPrimary"      : "KAWAI_U2_EMER_FLW_RHS_MN_P_PID_SP",
+                      "measureValuePrimary"  : "KAWAI_U2_EMER_FLW_RHS_MN_P_PID_MEAS",
+                      "outputPrimary"        : "KAWAI_U2_EMER_FLW_RHS_MN_P_PID_OP",
+                      "setpointSecondary"    : "KAWAI_U2_EMER_FLW_RHS_MN_S_PID_SP",
+                      "measureValueSecondary": "KAWAI_U2_EMER_FLW_RHS_MN_S_PID_MEAS",
+                      "controlvalveSecondary": "KAWAI_U2_EMER_FLW_RHS_MN_S_PID_OP"
+                  },
+                  "parameters": {
+                     "open_loop": {
+                        "kp": "3.33",
+                        "ki": "2.50",
+                        "kd": "0.40"
+                    },
+                     "closed_loop": {
+                        "kp": "5.0",
+                        "ki": "1.00",
+                        "kd": "0.30"
+                    }
+                  }
+                }
+              }
+            ],
+             "Second_stage": [
+              {
+                 "primary_pid": {
+                   "tags": {
+                      "setpointPrimary"      : "KAWAI_U2_MICR_FLW_RHS_MN_P_PID_SP",
+                      "measureValuePrimary"  : "KAWAI_U2_MICR_FLW_RHS_MN_P_PID_MEAS",
+                      "outputPrimary"        : "KAWAI_U2_MICR_FLW_RHS_MN_P_PID_OP",
+                      "setpointSecondary"    : "KAWAI_U2_MICR_FLW_RHS_MN_S_PID_SP",
+                      "measureValueSecondary": "KAWAI_U2_MICR_FLW_RHS_MN_S_PID_MEAS",
+                      "controlvalveSecondary": "KAWAI_U2_MICR_FLW_RHS_MN_S_PID_OP"
+                  },
+                   "parameters": {
+                     "open_loop": {
+                       "kp": "3.33",
+                       "ki": "2.50",
+                       "kd": "0.40"
+                    },
+                     "closed_loop": {
+                       "kp": "5.00",
+                       "ki": "1.00",
+                       "kd": "0.30"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+         }
+       }
+    }
+}

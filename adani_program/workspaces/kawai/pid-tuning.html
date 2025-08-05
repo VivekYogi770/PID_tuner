@@ -1,0 +1,388 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PID Tuning System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="pid-tuning.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!--<script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>-->
+    
+    <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
+
+  </head>
+
+  <body>
+    <div class="app-container">
+      <!-- Header -->
+      <header class="header">
+        <div class="header-left">
+          <button id="sidebar-toggle" class="sidebar-toggle">
+            <i data-lucide="menu"></i>
+          </button>
+          <h1 class="app-title">PID Tuning System</h1>
+        </div>
+        <div class="header-right">
+          <div class="header-info">
+            <div class="load-info">
+              <!-- <div class="load-label">Load</div> -->
+              <!-- <div class="load-value" id="current-load">Loading...</div> -->
+            </div>
+            <div class="date-info">
+              <div class="date" id="current-date">Loading date...</div>
+              <div class="time" id="current-time">Loading time...</div>
+            </div>
+            <div class="divider"></div>
+            <div class="location-info">
+              <div class="location" id="location-name">Kawai,Rajasthan</div>
+              <div class="weather" id="weather-info">Loading weather...</div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main Container with Sidebar and Content -->
+      <div class="main-container">
+        <!-- Sidebar -->
+        <aside id="sidebar" class="sidebar">
+          <div class="sidebar-content">
+            <!-- PID Controllers Section -->
+            <div class="nav-tree" id="pid-nav-tree">
+              <h3>PID CONTROLLERS</h3>
+              <div id="pid-hierarchy-tree">
+                <!-- Will be dynamically populated by pid-tuning.js -->
+              </div>
+            </div>
+            
+            <!-- Summary Reports Section -->
+            <div class="nav-tree" id="reports-nav-tree">
+              <h3>REPORTS</h3>
+              <ul class="nav-tree-list">
+                <li class="nav-item">
+                  <a href="#" id="summary-reports-link" class="nav-item-link">
+                    <i data-lucide="file-text"></i>
+                    <span>Summary Reports</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" id="feedback-link" class="nav-item-link">
+                    <i data-lucide="message-square"></i>
+                    <span>Feedback</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="system-status">
+            <h3>System Status</h3>
+            <div class="status-indicator">
+              <div class="status-dot"></div>
+              <span id="system-status-text">Online and Operating</span>
+            </div>
+          </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main id="main-content" class="main-content">
+          <div id="pid-content">
+            <!-- Initial message when no PID is selected -->
+            <div class="initial-message" id="initial-selection-message">
+              <i data-lucide="sliders" class="initial-icon"></i>
+              <h2>Select a PID controller from the sidebar</h2>
+              <p>View detailed analysis, tune parameters, and optimize controller performance</p>
+            </div>
+            
+
+            <!-- PID Detail View (hidden initially) -->
+            <div class="pid-detail-container" id="pid-detail-view" style="display: none;">
+              <div class="pid-detail-header">
+                <div class="pid-title">
+                  <h2 id="pid-title">PID Controller</h2>
+                  <span id="pid-type" class="pid-type primary">Primary</span>
+                  <div id="pid-tags-container" class="pid-tags-container">
+                    <!-- Tags will be dynamically added here -->
+                  </div>
+                </div>
+
+                
+                <div class="pid-status-panels">
+                  <div class="status-panel">
+                    <div class="status-header">Status</div>
+                    <div id="pid-status" class="status-value normal">Loading...</div>
+                  </div>
+                  <div class="status-panel">
+                    <div class="status-header">Error Margin</div>
+                    <div id="pid-error-margin" class="status-value">Loading...</div>
+                  </div>
+                  <div class="status-panel">
+                    <div class="status-header">Current Setpoint</div>
+                    <div id="pid-setpoint" class="status-value">Loading...</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="recommendation-container">
+                <h3>Recommendations</h3>
+                <div id="pid-recommendation" class="recommendation-content">
+                  <i data-lucide="lightbulb"></i>
+                  <div>
+                    <strong>Loading recommendations...</strong>
+                    <p>Please wait while we analyze the controller data.</p>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Chart for Temperature vs Setpoint -->
+              <div class="pid-chart-container">
+                <h3>Temperature vs Setpoint (Last 24 Hours)</h3>
+                <div class="chart-wrapper">
+                  <canvas id="pidChart"></canvas>
+                </div>
+              </div>
+              
+              <!-- PID Details Section (optional) -->
+              <div id="pid-details" class="pid-details">
+                <!-- Will be populated dynamically with metrics -->
+              </div>
+              
+              <!-- PID Tuning Parameters Table -->
+              <div class="pid-tuning-container">
+                <h3>PID Tuning Parameters</h3>
+                <table class="tuning-table">
+                  <thead>
+                    <tr>
+                      <th rowspan="2">Parameter</th>
+                      <th colspan="2">Open Loop Values</th>
+                      <th colspan="2">Closed Loop Values</th>
+                    </tr>
+                    <tr>
+                      <th>Current</th>
+                      <th>Suggested</th>
+                      <th>Current</th>
+                      <th>Suggested</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Kp (Proportional)</td>
+                      <td id="current-kp-open">-</td>
+                      <td id="suggested-kp-open">-</td>
+                      <td id="current-kp-closed">-</td>
+                      <td id="suggested-kp-closed">-</td>
+                    </tr>
+                    <tr>
+                      <td>Ki (Integral)</td>
+                      <td id="current-ki-open">-</td>
+                      <td id="suggested-ki-open">-</td>
+                      <td id="current-ki-closed">-</td>
+                      <td id="suggested-ki-closed">-</td>
+                    </tr>
+                    <tr>
+                      <td>Kd (Derivative)</td>
+                      <td id="current-kd-open">-</td>
+                      <td id="suggested-kd-open">-</td>
+                      <td id="current-kd-closed">-</td>
+                      <td id="suggested-kd-closed">-</td>
+                    </tr>
+                  </tbody>
+                </table>
+                
+                <div class="tuning-actions">
+                  <button id="apply-tuning" class="action-button apply" disabled>
+                    <i data-lucide="check"></i>
+                    <span>Apply Tuning</span>
+                  </button>
+                  <button id="simulator-toggle" class="action-button simulator">
+                    <i data-lucide="settings"></i>
+                    <span>Open PID Simulator</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Summary Reports View (hidden initially) -->
+            <!-- Summary Reports View -->
+    <div id="summary-reports-view" class="summary-reports-view" style="display: none;">
+      <div class="section-header">
+        <h2>PID Controllers Summary Reports</h2>
+        <p>This section provides various reports about the PID controllers in the system.</p>
+      </div>
+      <div id="summary-reports-container" class="summary-reports-container">
+        <h3>Recent Tuning Activities</h3>
+        <table id="tuning-activities-table" class="tuning-table">
+          <thead>
+            <tr>
+              <th>Controller</th>
+              <th>Status</th>
+              <th>recommendation</th>
+            </tr>
+          </thead>
+          <tbody id="tuning-activities-body">
+            <tr>
+              <td colspan="3" class="loading-message">Loading tuning activities...</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="download-button-container">
+          <button id="download-report" class="download-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            Download Report
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+    <!-- Feedback View (hidden initially) -->
+    <div class="feedback-container" id="feedback-view" style="display: none;">
+      <div class="pid-detail-header">
+        <div class="pid-title">
+          <h2>PID System Feedback</h2>
+          <p>Your feedback helps us improve the PID tuning system</p>
+        </div>
+      </div>
+      
+      <div class="feedback-content">
+        <div id="form-container">
+          <form id="feedback-form" onsubmit="handleFeedback(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Your Name <span class="required">*</span></label>
+                <input type="text" id="name" name="name" required>
+              </div>
+              <div class="form-group">
+                <label for="site">Site Location <span class="required">*</span></label>
+                <input type="text" id="site" name="site" required>
+              </div>
+            </div>
+            
+            <div class="form-row">
+              <div class="form-group">
+                <label for="department">Department <span class="required">*</span></label>
+                <input type="text" id="department" name="department" required>
+              </div>
+              <div class="form-group">
+                <label for="email">Email Address <span class="required">*</span></label>
+                <input type="email" id="email" name="email" required>
+              </div>
+            </div>
+            
+            <div class="form-row">
+              <div class="form-group">
+                <label for="phone">Phone Number <span class="required">*</span></label>
+                <input type="tel" id="phone" name="phone" required>
+                <small>Format: 10 digits, starting with 6-9</small>
+              </div>
+              <div class="form-group">
+                <label for="category">Feedback Category</label>
+                <select id="category" name="category">
+                  <option value="suggestion">Suggestion</option>
+                  <option value="bug">Bug Report</option>
+                  <option value="feature">Feature Request</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="feedback">Feedback <span class="required">*</span></label>
+              <textarea id="feedback" name="feedback" rows="5" required></textarea>
+            </div>
+            
+            <div class="form-actions">
+              <button type="submit" class="action-button apply">
+                <i data-lucide="send"></i>
+                <span>Submit Feedback</span>
+              </button>
+              <button type="reset" class="action-button simulator">
+                <i data-lucide="refresh-cw"></i>
+                <span>Reset Form</span>
+              </button>
+            </div>
+          </form>
+        </div>
+        
+        <div id="thank-you-message" style="display: none;">
+          <div class="thank-you-content">
+            <i data-lucide="check-circle" class="thank-you-icon"></i>
+            <h3>Thank You for Your Feedback!</h3>
+            <p>Your input is valuable to us and will help improve the PID Tuning System.</p>
+            <button id="submit-another" class="action-button apply">
+              <i data-lucide="plus"></i>
+              <span>Submit Another Feedback</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+</div>
+</div>
+    <!-- PID Simulator Modal -->
+    <div id="simulator-modal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>PID Wave Simulator</h3>
+          <button class="close-button" id="close-simulator">
+            <i data-lucide="x"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <!-- <div class="simulator-controls">
+            <div class="control-group">
+              <label>Setpoint</label>
+              <input type="range" id="simulator-setpoint" min="400" max="600" value="540" step="5">
+              <span class="value-display"><span id="setpoint-value">540</span>°C</span>
+            </div>
+            <div class="control-group">
+              <label>Disturbance</label>
+              <input type="range" id="simulator-disturbance" min="0" max="100" value="0">
+              <span class="value-display"><span id="disturbance-value">0</span>%</span>
+            </div> -->
+            <div class="parameter-controls">
+              <div class="parameter-group">
+                <!-- <h4>Controller Parameters</h4>
+                <div class="control-row">
+                  <label>Kp</label>
+                  <input type="number" id="simulator-kp" min="0" max="2" step="0.01" value="0.5">
+                </div>
+                <div class="control-row">
+                  <label>Ki</label>
+                  <input type="number" id="simulator-ki" min="0" max="1" step="0.01" value="0.3">
+                </div>
+                <div class="control-row">
+                  <label>Kd</label>
+                  <input type="number" id="simulator-kd" min="0" max="0.5" step="0.01" value="0.1">
+                </div> -->
+              </div>
+            </div>
+          </div>
+          <div class="simulator-chart-container">
+            <canvas id="simulator-chart"></canvas>
+          </div>
+          <div class="simulator-actions">
+            <button id="simulator-start" class="button primary">Start Simulation</button>
+            <button id="simulator-stop" class="button secondary" disabled>Stop Simulation</button>
+            <button id="simulator-reset" class="button secondary">Reset</button>
+            <!-- <button id="simulator-apply" class="button primary">Apply to Controller</button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Toast Container for Notifications -->
+    <div id="toast-container"></div>
+
+    <!-- <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script> -->
+    <script src="weather.js"></script>
+    <script src="pid-simulator.js"></script>
+    <script src="pid2.js"></script>
+  </body>
+</html>

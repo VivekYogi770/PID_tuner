@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PID Tuning System - Summary Reports</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="pid-tuning.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-left">
+        <button id="sidebar-toggle" class="sidebar-toggle">
+          <i data-lucide="menu"></i>
+        </button>
+        <h1 class="app-title">PID Tuning System</h1>
+      </div>
+      <div class="header-right">
+        <div class="header-info">
+          <div class="date-info">
+            <div class="date" id="current-date">Loading date...</div>
+            <div class="time" id="current-time">Loading time...</div>
+          </div>
+          <div class="divider"></div>
+          <div class="location-info">
+            <div class="location" id="location-name">Kawai, Rajasthan</div>
+            <div class="weather" id="weather-info">Loading weather...</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Container with Sidebar and Content -->
+    <div class="main-container">
+      <!-- Sidebar -->
+      <aside id="sidebar" class="sidebar">
+        <div class="sidebar-content">
+          <!-- PID Controllers Section -->
+          <div class="nav-tree" id="pid-nav-tree">
+            <h3>PID CONTROLLERS</h3>
+            <div id="pid-hierarchy-tree">
+              <!-- Will be dynamically populated by summary-reports.js -->
+            </div>
+          </div>
+          
+          <!-- Summary Reports Section -->
+          <div class="nav-tree" id="reports-nav-tree">
+            <h3>REPORTS</h3>
+            <ul class="nav-tree-list">
+              <li class="nav-item">
+                <a href="summary-reports.html" class="nav-item-link active">
+                  <i data-lucide="file-text"></i>
+                  <span>Summary Reports</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="system-status">
+          <h3>System Status</h3>
+          <div class="status-indicator">
+            <div class="status-dot"></div>
+            <span>Online and Operating</span>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main id="main-content" class="main-content">
+        <div class="pid-detail-container">
+          <h2>PID Controllers Summary Reports</h2>
+          <p>This section provides various reports about the PID controllers in the system.</p>
+          
+          <div class="pid-chart-container">
+            <h3>System Performance Overview</h3>
+            <div class="chart-wrapper">
+              <canvas id="summaryChart"></canvas>
+            </div>
+          </div>
+          
+          <div class="pid-tuning-container">
+            <h3>Recent Tuning Activities</h3>
+            <table class="tuning-table">
+              <thead>
+                <tr>
+                  <th>Controller</th>
+                  <th>Last Tuned</th>
+                  <th>Tuner</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>BOILER SYSTEM - LHS - First_stage - primary_pid</td>
+                  <td>Apr 1, 2025</td>
+                  <td>System</td>
+                  <td><span class="status-value normal">Optimized</span></td>
+                </tr>
+                <tr>
+                  <td>BOILER SYSTEM - RHS - First_stage - secondary_pid</td>
+                  <td>Mar 29, 2025</td>
+                  <td>John Doe</td>
+                  <td><span class="status-value normal">Optimized</span></td>
+                </tr>
+                <tr>
+                  <td>BOILER SYSTEM - LHS - Second_stage - primary_pid</td>
+                  <td>Mar 28, 2025</td>
+                  <td>System</td>
+                  <td><span class="status-value issue">Needs Review</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+  
+  <!-- Toast Container for Notifications -->
+  <div id="toast-container"></div>
+  
+  <script src="weather.js"></script>
+  <script src="summary-reports.js"></script>
+</body>
+</html>

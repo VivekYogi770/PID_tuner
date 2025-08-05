@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PID Chart</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/luxon@3/build/global/luxon.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon"></script>
+</head>
+<body>
+  <h2 id="chartTitle">Loading...</h2>
+  <canvas id="pidChart" style="max-width: 100%; height: 500px;"></canvas>
+
+  <script>
+    const requestData = {
+      "setpointPrimary": "KAWAI_U2_1ST_STG_LHS_MN_P_PID_SP",
+      "measureValuePrimary": "KAWAI_U2_1ST_STG_LHS_MN_P_PID_MEAS",
+      "outputPrimary": "KAWAI_U2_1ST_STG_LHS_MN_P_PID_OP",
+      "setpointSecondary": "KAWAI_U2_1ST_STG_LHS_MN_S_PID_SP",
+      "measureValueSecondary": "KAWAI_U2_1ST_STG_LHS_MN_S_PID_MEAS",
+      "controlvalveSecondary": "KAWAI_U2_1ST_STG_LHS_MN_S_PID_OP",
+      "starttime": "2025-01-01 00:00:00",
+      "endtime": "2025-01-01 23:45:00"
+    };
+
+    fetch("http://127.0.0.1:5000/pidtest", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(requestData)
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log("Received data:", data);
+      renderPIDChart(data);
+    })
+    .catch(error => console.error("Fetch error:", error));
+
+    function renderPIDChart(data) {
+      const { timestamps, series, title, xlabel, ylabel } = data;
+
+      if (!timestamps || !series || !Array.isArray(timestamps)) {
+        console.error("Invalid data format:", data);
+        return;
+      }
+
+      const colorMap = {
+        "Setpoint": "rgba(255, 193, 7, 1)",      // Yellow
+        "Upper Acceptable Limit": "rgba(108, 117, 125, 1)" ,              // Gray
+        "Lower Acceptable Limit": "rgba(108, 117, 125, 1)",               // Gray
+        "Measured Output": "rgba(0, 123, 255, 1)",                    // Blue
+        "Issue Points": "rgba(220, 53, 69, 1)",             // Red
+      };
+
+      const datasets = Object.keys(series).map((key) => {
+        const yData = series[key];
+        if (!Array.isArray(yData)) return null;
+
+        const dataPoints = timestamps.map((ts, i) => {
+          const dt = luxon.DateTime.fromFormat(ts, "yyyy-MM-dd HH:mm:ss");
+          return {
+            x: dt.isValid ? dt.toISO() : null,
+            y: yData[i]
+          };
+        }).filter(point => point.x !== null);
+
+        const isIssuePoints = key === "Issue Points";
+
+        return {
+          label: key,
+          data: dataPoints,
+          type: isIssuePoints ? 'scatter' : 'line',
+          borderColor: colorMap[key] || "rgba(0,0,0,1)",
+          backgroundColor: (colorMap[key] || "rgba(0,0,0,1)").replace("1)", "0.2)"),
+          fill: false,
+          tension: isIssuePoints ? 0 : 0.4,
+          pointRadius: isIssuePoints ? 5 : 1,
+          borderDash: isIssuePoints ? [5, 5] : (key.includes("Limit") ? [4, 2] : []),
+          showLine: !isIssuePoints
+        };
+      }).filter(Boolean);
+
+      const ctx = document.getElementById("pidChart").getContext("2d");
+
+      if (window.pidChartInstance) window.pidChartInstance.destroy();
+
+      window.pidChartInstance = new Chart(ctx, {
+        type: "line",
+        data: { datasets },
+        options: {
+          responsive: true,
+          interaction: { mode: "nearest", axis: "x", intersect: false },
+          scales: {
+            x: {
+              type: "time",
+              time: {
+                tooltipFormat: "yyyy-MM-dd HH:mm:ss",
+                unit: "hour",
+                displayFormats: { hour: "HH:mm" }
+              },
+              title: { display: true, text: xlabel || "Time" }
+            },
+            y: {
+              title: { display: true, text: ylabel || "Value" }
+            }
+          },
+          plugins: {
+            title: { display: true, text: title || "PID Chart" },
+            tooltip: { mode: "index", intersect: false }
+          }
+        }
+      });
+
+      document.getElementById("chartTitle").textContent = title || "PID Chart";
+    }
+  </script>
+</body>
+</html>

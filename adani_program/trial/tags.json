@@ -1,0 +1,250 @@
+{
+    "super_heater": {
+        "LHS": {
+            "First_stage": [
+                {
+                    "primary_pid": {
+                        "tags": {
+                            "setpoint": "KAWAI_U2_1ST_STG_LHS_MN_P_PID_SP",
+                            "measured": "KAWAI_U2_1ST_STG_LHS_MN_P_PID_MEAS",
+                            "output"  : "KAWAI_U2_1ST_STG_LHS_MN_P_PID_OP",
+                            "Pband"   : 40,
+                            "KI"      : 3.50,
+                            "KD"      : 0.30,
+                            "Load"    : "KAWAI_U2_LD_1"
+                        }
+                    }
+                },
+                {
+                    "secondary_pid": {
+                        "tags": {
+                            "setpoint": "KAWAI_U2_1ST_STG_LHS_MN_S_PID_SP",
+                            "measured": "KAWAI_U2_1ST_STG_LHS_MN_S_PID_MEAS",
+                            "output"  : "KAWAI_U2_1ST_STG_LHS_MN_S_PID_OP",
+                            "Pband"   : 40,
+                            "KI"      : 3.50,
+                            "KD"      : 0.35,
+                            "Load"    : "KAWAI_U2_LD_1"
+                        }
+                    }
+                }
+            ],
+
+            "Second_stage": [
+                {
+                    "primary_pid": {
+                        "tags": {
+                            "setpoint": "KAWAI_U2_2ND_STG_LHS_MN_P_PID_SP",
+                            "measured": "KAWAI_U2_2ND_STG_LHS_MN_P_PID_MEAS",
+                            "output"  : "KAWAI_U2_2ND_STG_LHS_MN_P_PID_OP",
+                            "Pband"   : 40,
+                            "KI"      : 3.40,
+                            "KD"      : 0.40,
+                            "Load"    : "KAWAI_U2_LD_1"
+                        }
+                    }
+                },
+                {
+                    "secondary_pid": {
+                        "tags": {
+                            "setpoint": "KAWAI_U2_2ND_STG_LHS_MN_S_PID_SP",
+                            "measured": "KAWAI_U2_2ND_STG_LHS_MN_S_PID_MEAS",
+                            "output"  : "KAWAI_U2_2ND_STG_LHS_MN_S_PID_OP",
+                            "Pband"   : 50,
+                            "KI"      : 4.00,
+                            "KD"      : 3.00,
+                            "Load"    : "KAWAI_U2_LD_1"
+                        }
+                    }
+                }
+            ]
+        },
+
+        "RHS": {
+            "First_stage": [
+                {
+                    "primary_pid": {
+                        "tags": {
+                            "setpoint": "KAWAI_U2_1ST_STG_RHS_MN_P_PID_SP",
+                            "measured": "KAWAI_U2_1ST_STG_RHS_MN_P_PID_MEAS",
+                            "output"  : "KAWAI_U2_1ST_STG_RHS_MN_P_PID_OP",
+                            "Pband"   : 60,
+                            "KI"      : 3.00,
+                            "KD"      : 0.50,
+                            "Load"    : "KAWAI_U2_LD_1"
+                        }
+                    }
+                },
+                {
+                    "secondary_pid": {
+                        "tags": {
+                            "setpoint": "KAWAI_U2_1ST_STG_RHS_MN_S_PID_SP",
+                            "measured": "KAWAI_U2_1ST_STG_RHS_MN_S_PID_MEAS",
+                            "output"  : "KAWAI_U2_1ST_STG_RHS_MN_S_PID_OP",
+                            "Pband"   : 20,
+                            "KI"      : 2.80,
+                            "KD"      : 0.10,
+                            "Load"    : "KAWAI_U2_LD_1"
+                        }
+                    }
+                }
+            ],
+
+            "Second_stage": [
+                {
+                    "primary_pid": {
+                        "tags": {
+                            "setpoint": "KAWAI_U2_2ND_STG_RHS_MN_P_PID_SP",
+                            "measured": "KAWAI_U2_2ND_STG_RHS_MN_P_PID_MEAS",
+                            "output"  : "KAWAI_U2_2ND_STG_RHS_MN_P_PID_OP",
+                            "Pband"   : 50,
+                            "KI"      : 3.40,
+                            "KD"      : 1.00,
+                            "Load"    : "KAWAI_U2_LD_1"
+                        }
+                    }
+                },
+                {
+                    "secondary_pid": {
+                        "tags": {
+                            "setpoint": "KAWAI_U2_2ND_STG_RHS_MN_S_PID_SP",
+                            "measured": "KAWAI_U2_2ND_STG_RHS_MN_S_PID_MEAS",
+                            "output"  : "KAWAI_U2_2ND_STG_RHS_MN_S_PID_OP",
+                            "Pband"   : 40,
+                            "KI"      : 2.40,
+                            "KD"      : 1.00,
+                            "Load"    : "KAWAI_U2_LD_1"
+                        }
+                    }
+                }
+            ]
+        }
+    },
+
+
+    "re_heater": {
+        "LHS": {
+            "First_stage": [
+                {
+                    "primary_pid": {
+                        "tags": {
+                            "setpoint": "KAWAI_U2_EMER_FLW_LHS_MN_P_PID_SP",
+                            "measured": "KAWAI_U2_EMER_FLW_LHS_MN_P_PID_MEAS",
+                            "output"  : "KAWAI_U2_EMER_FLW_LHS_MN_P_PID_OP",
+                            "Pband"   : 60,
+                            "KI"      : 3.00,
+                            "KD"      : 1.00,
+                            "Load"    : "KAWAI_U2_LD_1"
+                        }
+                    }
+                },
+                {
+                    "secondary_pid": {
+                        "tags": {
+                            "setpoint": "KAWAI_U2_EMER_FLW_LHS_MN_S_PID_SP",
+                            "measured": "KAWAI_U2_EMER_FLW_LHS_MN_S_PID_MEAS",
+                            "output"  : "KAWAI_U2_EMER_FLW_LHS_MN_S_PID_OP",
+                            "Pband"   : 20,
+                            "KI"      : 3.00,
+                            "KD"      : 1,
+                            "Load"    : "KAWAI_U2_LD_1"
+                        }
+                    }
+                }
+            ],
+
+            "Second_stage": [
+                {
+                    "primary_pid": {
+                        "tags": {
+                            "setpoint": "KAWAI_U2_MICR_FLW_LHS_MN_P_PID_SP",
+                            "measured": "KAWAI_U2_MICR_FLW_LHS_MN_P_PID_MEAS",
+                            "output"  : "KAWAI_U2_MICR_FLW_LHS_MN_P_PID_OP",
+                            "Pband"   : 60,
+                            "KI"      : 3.00,
+                            "KD"      : 1.00,
+                            "Load"    : "KAWAI_U2_LD_1"
+                        }
+                    }
+                },
+                {
+                    "secondary_pid": {
+                        "tags": {
+                            "setpoint": "KAWAI_U2_MICR_FLW_LHS_MN_S_PID_SP",
+                            "measured": "KAWAI_U2_MICR_FLW_LHS_MN_S_PID_MEAS",
+                            "output"  : "KAWAI_U2_MICR_FLW_LHS_MN_S_PID_OP",
+                            "Pband"   : 20,
+                            "KI"      : 2.00,
+                            "KD"      : 1.00,
+                            "Load"    : "KAWAI_U2_LD_1"
+                        }
+                    }
+                }
+            ]
+        },
+
+        "RHS": {
+            "First_stage": [
+                {
+                    "primary_pid": {
+                        "tags": {
+                            "setpoint": "KAWAI_U2_EMER_FLW_RHS_MN_P_PID_SP",
+                            "measured": "KAWAI_U2_EMER_FLW_RHS_MN_P_PID_MEAS",
+                            "output"  : "KAWAI_U2_EMER_FLW_RHS_MN_P_PID_OP",
+                            "Pband"   : 30,
+                            "KI"      : 4.00,
+                            "KD"      : 0.30,
+                            "Load"    : "KAWAI_U2_LD_1"
+                        }
+                    }
+                },
+                {
+                    "secondary_pid": {
+                        "tags": {
+                            "setpoint": "KAWAI_U2_EMER_FLW_RHS_MN_S_PID_SP",
+                            "measured": "KAWAI_U2_EMER_FLW_RHS_MN_S_PID_MEAS",
+                            "output"  : "KAWAI_U2_EMER_FLW_RHS_MN_S_PID_OP",
+                            "Pband"   : 40,
+                            "KI"      : 2.50,
+                            "KD"      : 0.35,
+                            "Load"    : "KAWAI_U2_LD_1"
+                        }
+                    }
+                }
+            ],
+
+            "Second_stage": [
+                {
+                    "primary_pid": {
+                        "tags": {
+                            "setpoint": "KAWAI_U2_MICR_FLW_RHS_MN_P_PID_SP",
+                            "measured": "KAWAI_U2_MICR_FLW_RHS_MN_P_PID_MEAS",
+                            "output"  : "KAWAI_U2_MICR_FLW_RHS_MN_P_PID_OP",
+                            "Pband"   : 30,
+                            "KI"      : 2.50,
+                            "KD"      : 0.40,
+                            "Load"    : "KAWAI_U2_LD_1"
+                        }
+                    }
+                },
+                {
+                    "secondary_pid": {
+                        "tags": {
+                            "setpoint": "KAWAI_U2_MICR_FLW_RHS_MN_S_PID_SP",
+                            "measured": "KAWAI_U2_MICR_FLW_RHS_MN_S_PID_MEAS",
+                            "output"  : "KAWAI_U2_MICR_FLW_RHS_MN_S_PID_OP",
+                            "Pband"   : 20,
+                            "KI"      : 1.00,
+                            "KD"      : 0.30,
+                            "Load"    : "KAWAI_U2_LD_1"
+
+                        }
+                    }
+                }
+            ]
+        }
+    },
+
+    "Load"    : "KAWAI_U2_LD_1"
+    
+}

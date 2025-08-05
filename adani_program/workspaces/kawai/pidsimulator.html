@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PID Wave Simulator</title>
+  <link rel="stylesheet" href="pidSimulator.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>PID Wave Visualizer</h1>
+    <p class="description">Visualize how PID controller parameters affect system response over time.</p>
+    
+    <button id="loadSimulator" class="btn-primary">Load PID Simulator</button>
+  </div>
+
+  <div id="simulatorModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>PID Wave Simulator</h2>
+        <button id="closeModal" class="close-btn">&times;</button>
+      </div>
+      
+      <div class="modal-body">
+        <div class="chart-container">
+          <div class="animation-controls">
+            <button id="toggleAnimation" class="btn-icon" title="Play/Pause animation">
+              <svg id="playPauseIcon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polygon points="10 8 16 12 10 16 10 8"></polygon>
+              </svg>
+            </button>
+            <button id="restartAnimation" class="btn-icon" title="Restart animation">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 2v6h-6"></path>
+                <path d="M3 12a9 9 0 0 1 15-6.7L21 8"></path>
+                <path d="M3 22v-6h6"></path>
+                <path d="M21 12a9 9 0 0 1-15 6.7L3 16"></path>
+              </svg>
+            </button>
+          </div>
+          
+          <div class="chart-wrapper">
+            <canvas id="pidChart"></canvas>
+          </div>
+          
+          <div id="progressBar" class="progress-bar">
+            <div id="progressFill" class="progress-fill"></div>
+          </div>
+        </div>
+        
+        <div class="controls-grid">
+          <div class="control-item">
+            <label for="kpSlider">Proportional Gain (Kp): <span id="kpValue">0.50</span></label>
+            <input type="range" id="kpSlider" min="0" max="2" step="0.01" value="0.5">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="pidSimulator.js"></script>
+</body>
+</html>
