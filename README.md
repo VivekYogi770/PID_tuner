@@ -22,3 +22,20 @@ Traditional PID tuning methods can be time-consuming and may not always yield op
 * Industrial Automation: Enhancing the control of machinery and processes.
 * Biotechnology: Managing complex bioprocesses with nonlinear dynamics.
 * Robotics: Improving the precision and stability of robotic movements.
+
+# How to use
+on terminal(vs code create virtual enviornment)
+* conda activate base
+* conda create -n venv python=3.10 -y
+
+**Requirements**
+* pip install -r requirements.txt
+
+**Backend function**
+* python api/index1.py(whole path)
+
+**Frontend**
+* workspaces/kawai/pid-tuning.html (main HTML file)
+* pid2.js (javascript file)
+* pid-architecture.json (valves hierarchy)
+
